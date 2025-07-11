@@ -13,7 +13,7 @@ const SearchTrainer = () => {
     useEffect(() => {
         const fetchTrainers = async () => {
             try {
-                const response = await axios.get("http://localhost:5000/api/trainers");
+                const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/trainers`);
                 setTrainers(response.data);
             } catch (error) {
                 console.error("Error fetching trainers:", error);

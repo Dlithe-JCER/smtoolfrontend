@@ -31,7 +31,7 @@ function ClientRequirement() {
     useEffect(() => {
         const fetchClients = async () => {
             try {
-                const response = await axios.post('http://localhost:5000/api/client-requirements');
+                const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}client-requirements`);
                 setClients(response.data);
             } catch (error) {
                 console.error('Error fetching clients:', error);

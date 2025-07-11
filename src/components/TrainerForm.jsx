@@ -26,7 +26,7 @@ const TrainerForm = () => {
         Object.entries(formData).forEach(([key, val]) => data.append(key, val));
 
         try {
-            const response = await axios.post("http://localhost:5000/api/trainers", data, {
+            const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}trainers`, data, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
 

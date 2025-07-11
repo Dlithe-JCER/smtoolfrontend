@@ -54,7 +54,7 @@ function TrainingRequirementForm() {
         e.preventDefault();
 
         try {
-            await axios.post("http://localhost:5000/api/trainerresponses", formData);
+            await axios.post(`${import.meta.env.VITE_API_BASE_URL}trainerresponses`, formData);
 
             Swal.fire({
                 icon: "success",

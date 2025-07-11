@@ -28,7 +28,7 @@ function ClientRequirementUpdate() {
     useEffect(() => {
         const fetchRequirement = async () => {
             try {
-                const res = await axios.get(`http://localhost:5000/api/client-requirements/${id}`);
+                const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}client-requirements/${id}`);
                 setFormData(res.data);
             } catch (error) {
                 console.error('Failed to fetch requirement:', error);
