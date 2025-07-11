@@ -10,18 +10,22 @@ const SearchTrainer = () => {
     const [trainers, setTrainers] = useState([]);
     const [selectedTrainer, setSelectedTrainer] = useState(null);
 
+    const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
     useEffect(() => {
         const fetchTrainers = async () => {
             try {
-                const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/trainers`);
+                const response = await axios.get(`${BASE_URL}/trainers`);
+                console.log("Fetched trainers:", response.data); // debug
                 setTrainers(response.data);
             } catch (error) {
                 console.error("Error fetching trainers:", error);
+                alert("Failed to fetch trainers. Please try again later.");
             }
         };
 
         fetchTrainers();
-    }, []);
+    }, [BASE_URL]);
 
     const handleSearch = (e) => {
         const term = e.target.value;
@@ -32,10 +36,10 @@ const SearchTrainer = () => {
             return;
         }
 
-        const filteredTrainers = trainers.filter(trainer =>
-            trainer.name.toLowerCase().includes(term.toLowerCase()) ||
-            trainer.skills?.some(skill => skill.toLowerCase().includes(term.toLowerCase())) ||
-            trainer.experience?.toString().includes(term)
+        const filteredTrainers = trainers.filter((trainer) =>
+            trainer?.name?.toLowerCase().includes(term.toLowerCase()) ||
+            trainer?.skills?.some((skill) => skill.toLowerCase().includes(term.toLowerCase())) ||
+            trainer?.experience?.toString().includes(term)
         );
 
         setSuggestions(filteredTrainers);
@@ -121,7 +125,7 @@ const SearchTrainer = () => {
                                     <td className="border border-gray-300 p-2">
                                         {selectedTrainer.resume && (
                                             <a
-                                                href={`http://localhost:5000/uploads/${selectedTrainer.resume}`}
+                                                href={`${BASE_URL.replace("/api", "")}/uploads/${selectedTrainer.resume}`}
                                                 download
                                                 className="bg-green-500 text-white px-3 py-1 rounded-md hover:bg-green-700"
                                             >
