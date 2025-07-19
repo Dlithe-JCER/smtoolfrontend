@@ -9,18 +9,23 @@ const SearchTrainer = () => {
     const [suggestions, setSuggestions] = useState([]);
     const [trainers, setTrainers] = useState([]);
     const [selectedTrainer, setSelectedTrainer] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+    const UPLOADS_BASE_URL = import.meta.env.VITE_UPLOADS_BASE_URL;
 
     useEffect(() => {
         const fetchTrainers = async () => {
+            setLoading(true);
             try {
                 const response = await axios.get(`${BASE_URL}/trainers`);
-                console.log("Fetched trainers:", response.data); // debug
+                console.log("Fetched trainers:", response.data);
                 setTrainers(response.data);
             } catch (error) {
                 console.error("Error fetching trainers:", error);
                 alert("Failed to fetch trainers. Please try again later.");
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -70,6 +75,8 @@ const SearchTrainer = () => {
                     value={searchTerm}
                     onChange={handleSearch}
                 />
+
+                {loading && <p className="mt-4 text-gray-500">Loading trainers...</p>}
 
                 {suggestions.length > 0 && (
                     <div className="suggestions mt-4 p-4 bg-gray-100 rounded-md shadow-md max-h-72 overflow-y-auto">
@@ -123,14 +130,16 @@ const SearchTrainer = () => {
                                         </a>
                                     </td>
                                     <td className="border border-gray-300 p-2">
-                                        {selectedTrainer.resume && (
+                                        {selectedTrainer.resume ? (
                                             <a
-                                                href={`${BASE_URL.replace("/api", "")}/uploads/${selectedTrainer.resume}`}
+                                                href={`${UPLOADS_BASE_URL}/${selectedTrainer.resume}`}
                                                 download
                                                 className="bg-green-500 text-white px-3 py-1 rounded-md hover:bg-green-700"
                                             >
                                                 Download Resume
                                             </a>
+                                        ) : (
+                                            <span className="text-red-500">No resume</span>
                                         )}
                                     </td>
                                 </tr>
