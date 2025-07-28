@@ -26,7 +26,7 @@ const TrainerForm = () => {
         Object.entries(formData).forEach(([key, val]) => data.append(key, val));
 
         try {
-            const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}trainers`, data, {
+            const response = await axios.post("http://localhost:5000/api/trainers", data, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
 
@@ -149,7 +149,7 @@ const TrainerForm = () => {
 
                     <div className="col-span-1 md:col-span-2 text-center">
                         <button
-                            type="submit"
+                            onClick={handleSubmit}
                             className="bg-[#1F3C88] hover:bg-blue-900 text-white px-6 py-3 rounded-lg font-semibold transition"
                         >
                             Add Trainer
