@@ -31,7 +31,7 @@ function ClientRequirement() {
     useEffect(() => {
         const fetchClients = async () => {
             try {
-                const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}client-requirements`);
+                const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/client-requirements`);
                 setClients(response.data);
             } catch (error) {
                 console.error('Error fetching clients:', error);
@@ -43,7 +43,7 @@ function ClientRequirement() {
         const fetchClients = async () => {
             try {
                 // Changed from POST to GET
-                const response = await axios.get('http://localhost:5000/api/client-requirements');
+                const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/client-requirements`);
                 setClients(response.data);
             } catch (error) {
                 console.error('Error fetching clients:', error);
@@ -93,7 +93,7 @@ function ClientRequirement() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/api/client-requirements', formData);
+            await axios.post(`${import.meta.env.VITE_API_BASE_URL}/client-requirements`, formData);
 
             Swal.fire({
                 icon: "success",

@@ -7,7 +7,7 @@ const CombinedDetails = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios.get('${import.meta.env.VITE_API_BASE_URL}/combined/combined-details')
+        axios.get(`${import.meta.env.VITE_API_BASE_URL}/combined/combined-details`)
             .then(res => {
                 setCombinedData(res.data);
                 setLoading(false);

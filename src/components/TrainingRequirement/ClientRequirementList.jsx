@@ -13,7 +13,7 @@ function ClientRequirementList() {
     useEffect(() => {
         const fetchRequirements = async () => {
             try {
-                const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}client-requirements`);
+                const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/client-requirements`);
                 const filtered = response.data.filter(req => req.isActive !== false);
 
                 const grouped = filtered.reduce((acc, curr) => {

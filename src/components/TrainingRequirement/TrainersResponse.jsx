@@ -9,7 +9,7 @@ const TrainerResponse = () => {
 
     const fetchResponses = async () => {
         try {
-            const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}trainerresponses`);
+            const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/trainerresponses`);
             const data = res.data;
 
             // Sort alphabetically by submittedBy (case-insensitive)
@@ -34,7 +34,7 @@ const TrainerResponse = () => {
 
         if (result.isConfirmed) {
             try {
-                await axios.delete(`http://localhost:5000/api/trainerresponses/${id}`);
+                await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/trainerresponses/${id}`);
                 Swal.fire('Deleted!', 'Trainer response deleted.', 'success');
                 fetchResponses();
             } catch (error) {

@@ -27,7 +27,7 @@ function TrainersRequirement() {
         e.preventDefault();
 
         try {
-            const res = await fetch("${import.meta.env.VITE_API_BASE_URL}trainerresponses", {
+            const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/trainerresponses`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
