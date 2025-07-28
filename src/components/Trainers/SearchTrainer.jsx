@@ -18,7 +18,7 @@ const SearchTrainer = () => {
         const fetchTrainers = async () => {
             setLoading(true);
             try {
-                const response = await axios.get(`${BASE_URL}trainers`);
+                const response = await axios.get(`${BASE_URL}/trainers`);
                 console.log("Fetched trainers:", response.data);
                 setTrainers(response.data);
             } catch (error) {
