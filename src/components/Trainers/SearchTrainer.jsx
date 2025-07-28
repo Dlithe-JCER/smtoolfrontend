@@ -15,8 +15,9 @@ const SearchTrainer = () => {
         const fetchTrainers = async () => {
             setLoading(true);
             try {
-                const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/trainers`);
-                console.log("Fetched trainers:", response.data);
+                const apiUrl = `${import.meta.env.VITE_API_BASE_URL}/trainers`;
+                console.log("Fetching trainers from:", apiUrl); // helpful debug
+                const response = await axios.get(apiUrl);
                 setTrainers(response.data);
             } catch (error) {
                 console.error("Error fetching trainers:", error);
@@ -38,13 +39,13 @@ const SearchTrainer = () => {
             return;
         }
 
-        const filteredTrainers = trainers.filter((trainer) =>
+        const filtered = trainers.filter((trainer) =>
             trainer?.name?.toLowerCase().includes(term.toLowerCase()) ||
             trainer?.skills?.some((skill) => skill.toLowerCase().includes(term.toLowerCase())) ||
             trainer?.experience?.toString().includes(term)
         );
 
-        setSuggestions(filteredTrainers);
+        setSuggestions(filtered);
     };
 
     const handleSelectTrainer = (trainer) => {
