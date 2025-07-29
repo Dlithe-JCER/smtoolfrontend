@@ -23,12 +23,16 @@ const SearchTrainer = () => {
             alert("Failed to fetch trainers. Please try again later.");
         } finally {
             setLoading(false);
-            console.log(JSON.stringify(trainers)); // helpful debug
+            // helpful debug
         }
     };
     useEffect(() => {
         fetchTrainers();
+        // verify()
     }, []);
+    useEffect(() => {
+        console.log(JSON.stringify(trainers));
+    })
 
     const handleSearch = (e) => {
         const term = e.target.value;
@@ -92,7 +96,11 @@ const SearchTrainer = () => {
                         </ul>
                     </div>
                 )}
-
+                {
+                    trainers.map((trainer) => (
+                        <h1>{JSON.stringify(trainer)}</h1>
+                    ))
+                }
                 {selectedTrainer && (
                     <div className="mt-6 bg-white p-6 rounded-lg shadow-md overflow-x-auto">
                         <h3 className="text-xl font-semibold text-blue-600 mb-4">Trainer Details</h3>
