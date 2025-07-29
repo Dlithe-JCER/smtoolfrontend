@@ -16,9 +16,9 @@ const SearchTrainer = () => {
             setLoading(true);
             try {
                 const apiUrl = `${import.meta.env.VITE_API_BASE_URL}/trainers`;
-                console.log("Fetching trainers from:", apiUrl); // helpful debug
-                const response = await axios.get(apiUrl);
-                setTrainers(response.data);
+                console.log("Fetching trainers from:", apiUrl);
+                // const response = await axios.get(apiUrl);
+                // setTrainers(response.data);
             } catch (error) {
                 console.error("Error fetching trainers:", error);
                 alert("Failed to fetch trainers. Please try again later.");
