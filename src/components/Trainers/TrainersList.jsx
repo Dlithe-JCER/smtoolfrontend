@@ -9,7 +9,8 @@ const TrainerList = () => {
     useEffect(() => {
         const fetchTrainers = async () => {
             try {
-                const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/trainers`);
+                // const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/trainers`);
+                const res = await axios.get(`http://143.110.185.65:5000/api/trainers`);
                 setTrainers(res.data);
             } catch (error) {
                 console.error("Error fetching trainers:", error);
