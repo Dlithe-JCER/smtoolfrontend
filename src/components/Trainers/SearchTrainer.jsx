@@ -11,22 +11,22 @@ const SearchTrainer = () => {
     const [selectedTrainer, setSelectedTrainer] = useState(null);
     const [loading, setLoading] = useState(false);
 
+    const fetchTrainers = async () => {
+        setLoading(true);
+        try {
+            const apiUrl = `${import.meta.env.VITE_API_BASE_URL}/trainers`;
+            console.log("Fetching trainers from:", apiUrl);
+            const response = await axios.get(apiUrl);
+            setTrainers(response.data);
+        } catch (error) {
+            console.error("Error fetching trainers:", error);
+            alert("Failed to fetch trainers. Please try again later.");
+        } finally {
+            setLoading(false);
+            console.log(JSON.stringify(trainers)); // helpful debug
+        }
+    };
     useEffect(() => {
-        const fetchTrainers = async () => {
-            setLoading(true);
-            try {
-                const apiUrl = `${import.meta.env.VITE_API_BASE_URL}/trainers`;
-                console.log("Fetching trainers from:", apiUrl);
-                const response = await axios.get(apiUrl);
-                setTrainers(response.data);
-            } catch (error) {
-                console.error("Error fetching trainers:", error);
-                alert("Failed to fetch trainers. Please try again later.");
-            } finally {
-                setLoading(false);
-            }
-        };
-
         fetchTrainers();
     }, []);
 
